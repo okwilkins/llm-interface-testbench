@@ -1,0 +1,52 @@
+name: llm_interface_testbench
+services:
+  ollama:
+    build:
+      dockerfile: ./docker/ollama.Dockerfile
+      args:
+        OLLAMA_VERSION: ${OLLAMA_VERSION}
+    container_name: llm_interface_testbench_ollama
+    ports:
+      - 11434:11434
+    volumes:
+      - models:/home/ollama/.ollama/models
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+
+  llama_cpp:
+    build:
+      dockerfile: ./docker/llama_cpp.Dockerfile
+      args:
+        LLAMACPP_VERSION: ${LLAMACPP_VERSION}
+    container_name: llm_interface_testbench_llama_cpp
+    ports:
+      - 6969:6969
+    volumes:
+      - models:/home/llama_cpp/models
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+
+  vllm:
+    build:
+      dockerfile: ./docker/vllm.Dockerfile
+      args:
+        VLLM_VERSION: ${VLLM_VERSION}
+    container_name: llm_interface_testbench_vllm
+    ports:
+      - 1337:1337
+    volumes:
+      - models:/home/vllm/models
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+
+volumes:
+  models:
