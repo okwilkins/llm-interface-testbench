@@ -1,4 +1,4 @@
-FROM python:3.11-bookworm AS base
+FROM nvcr.io/nvidia/pytorch:24.07-py3 AS base
 
 RUN groupadd -r vllm && useradd -r -g vllm vllm
 RUN mkdir -p /home/vllm && chown -R vllm:vllm /home/vllm
