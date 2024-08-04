@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "llm-interface-testbench"
+version = "0.0.1"
+authors = [{ name = "Oliver Kenyon Wilkins", email = "okwilkins@googlemail.com" }]
+requires-python = ">=3.10"
+readme = "README.md"
+license = {file = "LICENSE"}
+
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "mypy"
+]
+
+
+[tool.setuptools]
+packages = ["llm_interface_testbench"]
