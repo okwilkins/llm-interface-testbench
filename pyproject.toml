@@ -10,12 +10,17 @@ authors = [{ name = "Oliver Kenyon Wilkins", email = "okwilkins@googlemail.com" 
 requires-python = ">=3.10"
 readme = "README.md"
 license = {file = "LICENSE"}
+dependencies = [
+    "huggingface-hub==0.24.5",
+    "ollama==0.3.1"
+]
 
 
 [project.optional-dependencies]
 dev = [
     "ruff",
-    "mypy"
+    "mypy",
+    "pytest"
 ]
 
 
