@@ -48,5 +48,21 @@ services:
           devices:
             - capabilities: [gpu]
 
+  tgi:
+    build:
+      dockerfile: ./docker/tgi.Dockerfile
+      args:
+        TGI_VERSION: ${TGI_VERSION}
+    container_name: llm_interface_testbench_tgi
+    ports:
+      - 8008:80
+    volumes:
+      - models:/home/tgi/models
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+
 volumes:
   models:
