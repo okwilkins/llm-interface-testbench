@@ -47,6 +47,8 @@ class OllamaModelDownloader:
     def download(self, model: str) -> None:
         """Download the specified model using the Ollama client.
 
+        For available models, look here: https://ollama.com/library
+
         Args:
             model: The name of the model to be downloaded.
         """

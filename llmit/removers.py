@@ -42,6 +42,8 @@ class OllamaModelRemover:
     def remove(self, model: str) -> None:
         """Remove the specified model using the Ollama client.
 
+        For available models, look here: https://ollama.com/library
+
         Args:
             model: The name of the model to be removed.
         """
