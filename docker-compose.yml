@@ -7,7 +7,7 @@ services:
         OLLAMA_VERSION: ${OLLAMA_VERSION}
     container_name: llm_interface_testbench_ollama
     ports:
-      - 11434:11434
+      - 8000:8000
     volumes:
       - models:/home/ollama/.ollama/models
     deploy:
@@ -23,7 +23,7 @@ services:
         LLAMACPP_VERSION: ${LLAMACPP_VERSION}
     container_name: llm_interface_testbench_llama_cpp
     ports:
-      - 6969:6969
+      - 8001:8000
     volumes:
       - models:/home/llama_cpp/models
     deploy:
@@ -39,7 +39,7 @@ services:
         VLLM_VERSION: ${VLLM_VERSION}
     container_name: llm_interface_testbench_vllm
     ports:
-      - 1337:1337
+      - 8002:8000 
     volumes:
       - models:/home/vllm/models
     deploy:
@@ -55,7 +55,7 @@ services:
         TGI_VERSION: ${TGI_VERSION}
     container_name: llm_interface_testbench_tgi
     ports:
-      - 8008:80
+      - 8003:8000
     volumes:
       - models:/home/tgi/models
     deploy:
