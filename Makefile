@@ -5,11 +5,14 @@ all: all_docker dev
 clean: clean_dev clean_docker
 
 # Dev environment setup
-dev: .venv
+dev: .venv .env
 	uv pip install -e .[dev]
 
 .venv:
 	uv venv
+
+.env:
+	cp sample.env .env
 
 clean_dev:
 	rm -rf .venv llm_interface_testbench.egg-info
