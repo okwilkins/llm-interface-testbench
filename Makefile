@@ -1,5 +1,7 @@
 .PHONY: clean dev all_docker ollama llama_cpp vllm tgi clean_docker
 
+all: all_docker dev
+
 clean: clean_dev clean_docker
 
 # Dev environment setup
