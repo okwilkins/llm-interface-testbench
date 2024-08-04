@@ -10,7 +10,7 @@ dev: .venv
 	uv venv
 
 clean_dev:
-	rm -rf .venv
+	rm -rf .venv llm_interface_testbench.egg-info
 
 
 # Docker services management
@@ -30,3 +30,4 @@ tgi:
 
 clean_docker:
 	docker-compose down --volumes --remove-orphans
+	docker system prune -f --volumes
