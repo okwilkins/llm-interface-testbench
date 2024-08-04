@@ -1,4 +1,5 @@
-FROM ghcr.io/huggingface/text-generation-inference:2.2.0 AS base
+ARG TGI_VERSION
+FROM ghcr.io/huggingface/text-generation-inference:${TGI_VERSION} AS base
 
 RUN groupadd -r tgi && useradd -r -g tgi tgi
 RUN mkdir -p /home/tgi /data && \
