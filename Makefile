@@ -22,16 +22,16 @@ clean_dev:
 all_docker: ollama llama_cpp vllm tgi
 
 ollama:
-	docker-compose up -d ollama
+	docker compose up --build -d ollama
 
 llama_cpp:
-	docker-compose up -d llama_cpp
+	docker compose up --build -d llama_cpp
 
 vllm:
-	docker-compose up -d vllm
+	docker compose up --build -d vllm
 
 tgi:
-	docker-compose up -d tgi
+	docker compose up --build -d tgi
 
 clean_docker:
 	docker-compose down --volumes --remove-orphans
