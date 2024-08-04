@@ -12,7 +12,9 @@ readme = "README.md"
 license = {file = "LICENSE"}
 dependencies = [
     "huggingface-hub==0.24.5",
-    "ollama==0.3.1"
+    "ollama==0.3.1",
+    "fastapi[standard]==0.112.0",
+    "pydantic==2.8.2"
 ]
 
 
