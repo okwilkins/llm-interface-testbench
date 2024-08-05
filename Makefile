@@ -1,6 +1,6 @@
 .PHONY: clean dev all_docker ollama llama_cpp vllm tgi clean_docker
 
-all: all_docker dev
+all: docker dev
 
 clean: clean_dev clean_docker
 
@@ -11,15 +11,16 @@ dev: .venv .env
 .venv:
 	uv venv
 
-.env:
-	cp sample.env .env
-
 clean_dev:
 	rm -rf .venv llm_interface_testbench.egg-info
 
 
 # Docker services management
-all_docker: ollama llama_cpp vllm tgi
+docker: .env
+	docker compose up --build -d ollama llama_cpp vllm tgi
+
+.env:
+	cp sample.env .env
 
 ollama:
 	docker compose up --build -d ollama
@@ -34,5 +35,6 @@ tgi:
 	docker compose up --build -d tgi
 
 clean_docker:
-	docker-compose down --volumes --remove-orphans
+	docker compose down --volumes --remove-orphans
 	docker system prune -f --volumes
+	rm -f .env
