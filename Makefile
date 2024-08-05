@@ -1,6 +1,3 @@
-DOCKER_COMPOSE=docker compose
-DOCKER_COMPOSE_UP=$(DOCKER_COMPOSE) up --build -d
-
 .PHONY: all clean
 all: docker python_dev
 clean: clean_dev clean_docker
@@ -22,7 +19,22 @@ clean_python_dev:
 	rm -rf .venv llm_interface_testbench.egg-info .mypy_cache .pytest_cache
 
 
+# Go dev
+AIR_EXISTS := $(shell command -v air 2> /dev/null)
+.PHONY: go_dev
+go_dev:
+ifdef AIR_EXISTS
+	air
+else
+	@echo "Air is not installed. Please install it to use live reloading."
+	@echo "Running the application without live reloading..."
+	go run server/main.go
+endif
+
+
 # Docker services management
+DOCKER_COMPOSE=docker compose
+DOCKER_COMPOSE_UP=$(DOCKER_COMPOSE) up --build -d
 .PHONY: docker clean_docker ollama llama_cpp vllm tgi
 docker: .env
 	$(DOCKER_COMPOSE_UP)
