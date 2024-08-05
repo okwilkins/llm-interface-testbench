@@ -35,7 +35,7 @@ else
 endif
 
 clean_python_dev:
-	rm -rf .venv llm_interface_testbench.egg-info .mypy_cache .pytest_cache
+	rm -rf .venv llm_interface_testbench.egg-info .mypy_cache .pytest_cache .ruff_cache
 
 
 # Go dev

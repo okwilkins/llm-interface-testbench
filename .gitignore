@@ -183,3 +183,6 @@ go.work.sum
 
 # Build with Air
 tmp/
+
+# Ruff
+.ruff_cache/
