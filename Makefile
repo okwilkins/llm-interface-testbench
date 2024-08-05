@@ -5,7 +5,7 @@ all: docker dev
 clean: clean_dev clean_docker
 
 # Dev environment setup
-dev: .venv .env
+dev: .venv
 	uv pip install -e .[dev]
 
 .venv:
