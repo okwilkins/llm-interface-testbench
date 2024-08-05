@@ -1,40 +1,48 @@
-.PHONY: clean dev all_docker ollama llama_cpp vllm tgi clean_docker
+DOCKER_COMPOSE=docker compose
+DOCKER_COMPOSE_UP=$(DOCKER_COMPOSE) up --build -d
 
-all: docker dev
-
+.PHONY: all clean
+all: docker python_dev
 clean: clean_dev clean_docker
 
 # Dev environment setup
-dev: .venv
+.PHONY: dev clean_dev
+dev: python_dev
+clean_dev: clean_python_dev
+
+# Python dev
+.PHONY: python_dev clean_python_dev
+python_dev: .venv
 	uv pip install -e .[dev]
 
 .venv:
 	uv venv
 
-clean_dev:
-	rm -rf .venv llm_interface_testbench.egg-info
+clean_python_dev:
+	rm -rf .venv llm_interface_testbench.egg-info .mypy_cache .pytest_cache
 
 
 # Docker services management
+.PHONY: docker clean_docker ollama llama_cpp vllm tgi
 docker: .env
-	docker compose up --build -d ollama llama_cpp vllm tgi
+	$(DOCKER_COMPOSE_UP)
+
+clean_docker:
+	$(DOCKER_COMPOSE) down --volumes --remove-orphans
+	docker system prune -f --volumes
+	rm -f .env
 
 .env:
 	cp sample.env .env
 
 ollama:
-	docker compose up --build -d ollama
+	$(DOCKER_COMPOSE_UP) ollama
 
 llama_cpp:
-	docker compose up --build -d llama_cpp
+	$(DOCKER_COMPOSE_UP) llama_cpp
 
 vllm:
-	docker compose up --build -d vllm
+	$(DOCKER_COMPOSE_UP) vllm
 
 tgi:
-	docker compose up --build -d tgi
-
-clean_docker:
-	docker compose down --volumes --remove-orphans
-	docker system prune -f --volumes
-	rm -f .env
+	$(DOCKER_COMPOSE_UP) tgi
